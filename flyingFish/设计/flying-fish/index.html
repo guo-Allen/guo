@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>小鱼海棠</title>
+		<style type="text/css">
+			.action {
+				position: absolute;
+				top: 48%;
+				left: 45%;
+			}
+			
+			.chose {
+				position: absolute;
+				top: 48%;
+				left: 30%;
+			}
+			.dropdown-menu {
+				background-color: transparent !important;
+			}
+			.dropdown-menu li {
+				padding-left: 20px;
+			}
+		</style>
+	</head>
+	<link rel="stylesheet" type="text/css" href="Plugins/bootstrap.min.css" />
+	<body>
+		<img src="imgs/bg.jpg" width="1366px" height="636px" />
+		<div class="chose">
+			<div class="dropdown">
+				<button class="btn btn-lg btn-info dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">&nbsp;&nbsp;选&nbsp;择&nbsp;难&nbsp;度&nbsp;&nbsp;&nbsp;   
+    <span class="caret"></span>
+  </button>
+				<ul class="dropdown-menu sections" aria-labelledby="dropdownMenu1">
+					<li><button class="btn btn-info ">&nbsp;&nbsp;&nbsp;简&nbsp;&nbsp;单&nbsp;&nbsp;&nbsp; </button> </li>
+					<li><button class="btn btn-info ">&nbsp;&nbsp;&nbsp;一&nbsp;&nbsp;般&nbsp;&nbsp;&nbsp; </button> </li>
+					<li><button class="btn btn-info ">&nbsp;&nbsp;&nbsp;有点难&nbsp;&nbsp;</button></li>
+					<li><button class="btn btn-info ">&nbsp;&nbsp;&nbsp;困&nbsp;&nbsp;难&nbsp;&nbsp;&nbsp;</button></li>
+					<li><button class="btn btn-info ">&nbsp;&nbsp;&nbsp;贼&nbsp;&nbsp;难&nbsp;&nbsp;&nbsp;</button></li>
+					<li><button class="btn btn-info ">&nbsp;&nbsp;&nbsp;逆&nbsp;&nbsp;天&nbsp;&nbsp;&nbsp;</button></li>
+				</ul>
+			</div>
+		</div>
+
+		<button class="btn btn-warning btn-lg action">&nbsp;&nbsp;&nbsp;开&nbsp;始&nbsp;游&nbsp;戏&nbsp;&nbsp;&nbsp;</button>
+	</body>
+	<script src="Plugins/jquery-2.2.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="Plugins/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var lis=$(".sections li button")
+		for (var i = 0; i < lis.length; i++) {
+			lis[i].onclick=function  () {
+				var txt=this.innerText;
+				$("#dropdownMenu1").text(txt)
+			}
+		}
+		$(".action").click(function () {
+			var hard=$("#dropdownMenu1").text()
+			console.log(hard)
+			if(hard=="   简  单   "){
+				sessionStorage.setItem("speed",70)
+				sessionStorage.setItem("tb",150)
+				sessionStorage.setItem("lr",170)
+				sessionStorage.setItem("a",8)
+				sessionStorage.setItem("min",100)
+				window.location.href="js/view/flying_fish.html"
+			}
+			if(hard=="   一  般   "){
+				sessionStorage.setItem("speed",80)
+				sessionStorage.setItem("tb",120)
+				sessionStorage.setItem("lr",140)
+				sessionStorage.setItem("a",10)
+				sessionStorage.setItem("min",90)
+				window.location.href="js/view/flying_fish.html"
+			}
+			if(hard=="   有点难  "){
+				sessionStorage.setItem("speed",300)
+				sessionStorage.setItem("tb",150)
+				sessionStorage.setItem("lr",150)
+				sessionStorage.setItem("a",15)
+				sessionStorage.setItem("min",100)
+				window.location.href="js/view/flying_fish.html"
+			}
+			if(hard=="   困  难   "){
+				sessionStorage.setItem("speed",100)
+				sessionStorage.setItem("tb",100)
+				sessionStorage.setItem("lr",100)
+				sessionStorage.setItem("a",15)
+				sessionStorage.setItem("min",70)
+				window.location.href="js/view/flying_fish.html"
+			}
+			if(hard=="   贼  难   "){
+				sessionStorage.setItem("speed",200)
+				sessionStorage.setItem("tb",100)
+				sessionStorage.setItem("lr",100)
+				sessionStorage.setItem("a",15)
+				sessionStorage.setItem("min",70)
+				window.location.href="js/view/flying_fish.html"
+			}
+			if(hard=="   逆  天   "){
+				sessionStorage.setItem("speed",300)
+				sessionStorage.setItem("tb",100)
+				sessionStorage.setItem("lr",100)
+				sessionStorage.setItem("a",20)
+				sessionStorage.setItem("min",70)
+				window.location.href="js/view/flying_fish.html"
+			}
+		})
+	</script>
+</html>
