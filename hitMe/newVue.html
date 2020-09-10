@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="app">
+			<p>问一个问题<input v-model="question" /></p>
+			<p>{{answer}}</p>
+		</div>
+
+	</body>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+	<script type="text/javascript">
+		var vm=new Vue({
+			el:"#app",
+			data:{
+				question:"",
+				answer:"你输入完毕我可以给你答案"
+			},
+			watch:{
+				question:function () {
+					this.answer="让我想一想，请稍等。。。";
+					this.deGetanswer();
+				}
+			},
+			created:function(){
+				this.deGetanswer=_.debounce(this.getAnswer,500);
+			},
+			methods:{
+				getAnswer:function () {
+					if(this.question.indexOf("?")===-1){
+						this.answer="问题请已问号结尾。";
+						return;
+					}
+					this.answer="思考中。。。";
+					var a=this;
+					axios.get("https://yesno.wtf/api")
+						.then(function (data) {
+							a.answer=_.captilize(data.data.answer);
+						})
+						.catch(function (data) {
+							a.answer="错了，原因是"+data;
+						})
+				}
+			}
+			
+		})
+		
+	</script>
+
+</html>

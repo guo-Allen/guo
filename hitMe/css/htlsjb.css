@@ -1,0 +1,187 @@
+html,body{
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	
+}
+#bg{
+	width: 100%;
+	height: 100%;
+	background:url(../img/game_bg.jpg)  no-repeat ;
+	background-size: 100% 100%;
+}
+
+.img{
+	position: absolute;
+	width: 20%;
+	height: 20%;
+	background:url(../img/h.png) ;
+	background-size: 1000% 100%;
+	visibility: hidden;
+}
+
+#content div:nth-child(1){
+	left:11%;
+	top: 33%;
+}
+
+#content div:nth-child(2){
+	left:36%;
+	top: 24%;
+}
+#content div:nth-child(3){
+	left: 64%;
+	top: 30%;
+}
+
+#content div:nth-child(4){
+	left:11%;
+	top: 45%;
+}
+#content div:nth-child(5){
+	left:36%;
+	top: 39%;
+}
+#content div:nth-child(6){
+	left:66%;
+	top: 43%;
+}
+#content div:nth-child(7){
+	left:14%;
+	top: 61%;
+}
+#content div:nth-child(8){
+	left:41%;
+	top: 57%;
+}
+#content div:nth-child(9){
+	left:69%;
+	top: 62%;
+}
+
+#fen{
+	position: absolute;
+	left: 20%;
+	top: 1%;
+	font-size: 51px;
+	color: yellow;var content=document.getElementById("content");
+var aDiv=content.getElementsByTagName("div");
+var fen=document.getElementById("fen");
+var time=document.getElementById("time");
+var fenshu=0;
+
+startGame();
+function startGame(){
+	var n=200;
+	var m=200;
+	end=setInterval(function(){
+		n--;
+		time.style.backgroundSize=n/m*time.offsetWidth+"px 100%";
+		if(n<0){
+			alert("gameover!");
+			clearInterval(end);
+			clearInterval(ks);
+		}
+	},50);
+}
+start();
+
+var fenshu=0;
+for (var i = 0; i < aDiv.length; i++) {
+	aDiv[i].onclick=function(){
+		moveda(this);
+		if(this.img=="a"){
+			fenshu+=10;
+		}else{
+			fenshu-=10;
+		}
+		fen.innerHTML=fenshu;
+	}
+}
+
+
+function start(){
+	ks=setInterval(function(){
+	var n= Math.floor(Math.random()*aDiv.length);
+	if(Math.random()<0.3){
+		aDiv[n].style.backgroundImage="url(img/b.png)";
+		aDiv[n].img="b";
+	}else{
+		aDiv[n].style.backgroundImage="url(img/a.png)";
+		aDiv[n].img="a";
+	}
+	moveUp(aDiv[n]);
+	},1000);
+}
+moveda();
+function moveda(obj){
+	var i=6;
+	th=setInterval(function (){
+		obj.style.visibility="visible";
+		i++;
+		var newWidth=-obj.offsetWidth*i;
+		obj.style.backgroundPosition=newWidth+"px 0";
+		if(i>=9){
+			setTimeout(function(){
+			movedown(obj);	
+			},200);
+			clearInterval(th);
+		}
+	},50);
+}
+
+function moveUp(obj){
+	var i=0;
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function (){
+		obj.style.visibility="visible";
+		i++;
+		var newWidth=-obj.offsetWidth*i;
+		obj.style.backgroundPosition=newWidth+"px 0";
+		if(i>=5){
+			setTimeout(function(){
+			movedown(obj);	
+			},200);
+			clearInterval(obj.timer);
+		}
+	},100);
+}
+
+function movedown(obj){
+	var j=5;
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function(){
+		j--;
+		var neww=-obj.offsetWidth*j;
+		obj.style.backgroundPosition=neww+"px 0";
+		if(j<=0){
+			obj.style.visibility="hidden";
+			clearInterval(obj.timer);
+		}
+	},50);
+}
+
+}
+
+#time{
+	position: absolute;
+	width: 57%;
+	height: 4%;
+	background:url(../img/progress.png)  no-repeat;
+	background-size: 100% 100%;
+	left: 19%;
+	top: 13%;
+	font-size: 32px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
